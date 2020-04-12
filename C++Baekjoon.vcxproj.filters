@@ -93,9 +93,6 @@
     <ClCompile Include="C++01261.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="C++12851하다말음.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="C++02206하다말.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
@@ -208,6 +205,9 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="C++01259.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="C++12851.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
