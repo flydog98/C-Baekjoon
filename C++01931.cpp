@@ -45,11 +45,11 @@ void merge(vector<pair<int, int>>* vec) { // 이건 제가 따로 구현해 둔 merge sort
 				}
 			}
 		}
-		else if (j >= part1->size()) { // part2가 다 배정됨
+		else if (j >= part1->size()) { // part2가 다 배정된 경우
 			vec->at(i) = part2->at(k);
 			k++;
 		}
-		else if (k >= part2->size()) { // part1이 다 배정됨
+		else if (k >= part2->size()) { // part1이 다 배정된 경우
 			vec->at(i) = part1->at(j);
 			j++;
 		}
@@ -60,21 +60,24 @@ void merge(vector<pair<int, int>>* vec) { // 이건 제가 따로 구현해 둔 merge sort
 }
 
 int main(void) {
-	int amount = 0;
+	int amount = 0; // 들어올 입력의 개수
 	int tempa = 0, tempb = 0; // 입력을 받기 위한 임시 공간
-	int ans = 0;
-	int temp = 0;
-	pair<int, int> pairtemp;
-	vector<pair<int, int>> conference;
+	int ans = 0; // 출력할 값
+	int temp = 0; // ans의 산출에 이용할 임시 공간
+	pair<int, int> pairtemp; // vector에 넣기 위한 임시 공간
+	vector<pair<int, int>> conference; // 입력 값들의 벡터. 배열을 선언했다고 이해하셔도 알고리즘 이해에 무리는 없습니다.
 
 	cin >> amount;
 
+	//pair을 사용하여 시작시간, 끝나는 시간을 하나의 변수로 묶음
+	//원소 2개를 가지는 배열이라고 생각하여도 무방합니다.
 	for (int i = 0; i < amount; i++) {
 		cin >> tempa >> tempb;
-		pairtemp = make_pair(tempa, tempb);
-		conference.push_back(pairtemp);
+		pairtemp = make_pair(tempa, tempb);//pairtep에 입력된 값을 저장 후
+		conference.push_back(pairtemp);//벡터의 마지막에 pairtemp를 넣는다.
 	}
-	// 입력 완료. 입력 단계에서 정보 가공의 여지가 적다고 생각했다.
+	// 입력 완료. 입력 단계에서 정보 가공의 여지가 적다고 생각해, 입력받으면서 정보를 가공하지는 않았다.
+	//다만 입력도 하나의 루프 형태를 띄는 경우가 많기 때문에, PS하면서 입력 때부터 시간 단축을 꾀하는 것도 손해볼 일은 없다.
 	
 	//입력받은 자료를 정렬하여, Greedy하게 시간을 배정하면 문제가 풀린다.
 	//끝나는 시간을 기준으로 정렬, 같은 경우 시작 시간이 빠른 경우를 먼저
