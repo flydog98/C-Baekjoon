@@ -88,7 +88,7 @@ int scan(int map[51][51]) { // 정해진 map에 대해 모든 치킨 거리의 값 의 합 리턴
 	return sum;
 }
 
-void dfs_combination(int map[51][51], vector<pair<int, int>>* chic_rest, int chickens[13], int chic_amount, int safe) {
+void dfs_combination(int map[51][51], vector<pair<int, int>>* chic_rest, int chickens[13], int chic_amount, int safe, int index) {
 	if (!safe) { // 조합으로 모든 가게가 선택된 경우 scan을 진행
 		//먼저 이번 scan에 사용될 map을 조작한다.
 		//조합에서 선택되지 않은 치킨집을 제거
@@ -106,14 +106,13 @@ void dfs_combination(int map[51][51], vector<pair<int, int>>* chic_rest, int chi
 		chicken_dist_min = min(chicken_dist_min, sum);
 	}
 	else { // 재귀적으로 치킨집들을 조합으로 묶음
-		for (int i = 0; i < chic_amount; i++) {
-			int chickens1[13];
-			copy(chickens, chickens + 13, chickens1);
-			if (!chickens1[i]) { // 순차적으로 접근했을 때, 선택되지 않은 치킨집이 나온다면,
-				chickens1[i] = 1; // 조합에 치킨집을 선택하고,
-				dfs_combination(map, chic_rest, chickens1, chic_amount, safe - 1); // dfs를 진행
-			}
-		}
+		if (index == chic_amount) return; // 조합의 가지 수를 다 채우지 못함
+		int chickens1[13], chickens2[13];
+		copy(chickens, chickens + 13, chickens1);
+		copy(chickens, chickens + 13, chickens2);
+		dfs_combination(map, chic_rest, chickens1, chic_amount, safe, index + 1); // 조합에 포함 안하는 경우
+		chickens2[index] = 1; // 조합에 치킨집을 선택하고,
+		dfs_combination(map, chic_rest, chickens2, chic_amount, safe - 1, index + 1); // 조합에 포함 하는 경우
 	}
 }
 
@@ -145,7 +144,7 @@ int main(void) {
 		}
 	}
 	// input 끝
-	dfs_combination(map, chicken_restraunt, chickens, chicken_amount, m);
+	dfs_combination(map, chicken_restraunt, chickens, chicken_amount, m, 0);
 
 	cout << chicken_dist_min << endl;
 
